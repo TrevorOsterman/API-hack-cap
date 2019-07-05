@@ -47,6 +47,28 @@ function dataReturn(loc, time){
     .catch(err => {
       $('#js-error-message').text(`Something went wrong: ${err.message}`);
     });
+
+//   var settings = {
+//   "async": true,
+//   "crossDomain": true,
+//   "url": "https://api.yelp.com/v3/businesses/search?sortby=rating&location=phoenix,%20az",
+//   "method": "GET",
+//   "headers": {
+//     "Authorization": "Bearer Oi573GrBv4w13yNAYNhpBCjWDx3IZIYGsxLn7vvj0oIXNkN-NagE5aB8oRgnC0-xSyac9xx9J39HCKSRf8bK6t6gEc7Y7zVbE1hGA47T-5dFyrMeJM0V2EZEm-cbXXYx",
+//     "User-Agent": "PostmanRuntime/7.15.0",
+//     "Accept": "*/*",
+//     "Cache-Control": "no-cache",
+//     "Postman-Token": "d4b8fdb8-221d-4dd2-bad0-5c9642f96521,096bd8c9-9b3d-4a26-a396-6484738a3497",
+//     "Host": "api.yelp.com",
+//     "accept-encoding": "gzip, deflate",
+//     "Connection": "keep-alive",
+//     "cache-control": "no-cache"
+//   }
+// }
+//
+// $.ajax(settings).done(function (response) {
+//   console.log(response);
+// });
 }
 
 function formListen() {
