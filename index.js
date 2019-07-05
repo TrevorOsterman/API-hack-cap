@@ -3,19 +3,59 @@ const eventKey = "FngcKv6W8V6qn67j";
 const yelpURL = 'https://api.yelp.com/v3/businesses/search?sortby=rating';
 const eventURL = 'http://api.eventful.com/rest/events/search';
 
+function formatQueryParams(params) {
+  const queryItems = Object.keys(params)
+    .map(key => `${key}=${params[key]}`)
+  return queryItems.join('&');
+}
 
-
-function dataReturn(location, date){
+function dataReturn(loc, time){
   console.log('dataReturn working');
+
+  const eventParams = {
+    app_key: eventKey,
+    location: loc,
+    date: time,
+  };
+  const yelpParams = {
+    location: loc,
+  };
+
+  const yelpString = formatQueryParams(yelpParams);
+  const eventString = formatQueryParams(eventParams)
+
+  const urlYelp = yelpURL + '?' + yelpString;
+  const urlEvent = eventURL + '?' + eventString;
+
+  console.log(urlYelp);
+  console.log(urlEvent);
+
+  const options = {
+    headers: new Headers({
+      'Authorization': `Bearer ${yelpKey}`,
+    })
+  };
+
+  fetch(urlYelp, options)
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(response.statusText);
+    })
+    .then(responseJson => console.log(responseJson))
+    .catch(err => {
+      $('#js-error-message').text(`Something went wrong: ${err.message}`);
+    });
 }
 
 function formListen() {
   console.log('formListen working')
   $('body').on('click', '#submit-button', function(event){
     event.preventDefault();
-    const location = $('#location').val();
-    const date = $('#date').val();
-    dataReturn(location, date);
+    const loc = $('#location').val();
+    const time = $('#date').val();
+    dataReturn(loc, time);
   })
 }
 
